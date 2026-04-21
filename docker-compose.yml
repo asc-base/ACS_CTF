@@ -25,7 +25,7 @@ services:
       cache:
         condition: service_started
     networks:
-      # gateway-nginx:
+      gateway-nginx:
       default:
       internal:
 
