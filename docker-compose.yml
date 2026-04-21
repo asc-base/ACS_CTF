@@ -25,6 +25,7 @@ services:
       cache:
         condition: service_started
     networks:
+      gateway-nginx:
       default:
       internal:
 
@@ -37,15 +38,15 @@ services:
       - .data/CTFd/uploads:/var/uploads
     command: chown -R 1001:1001 /var/uploads /var/log/CTFd
 
-  nginx:
-    image: nginx:stable
-    restart: always
-    volumes:
-      - ./conf/nginx/http.conf:/etc/nginx/nginx.conf
-    ports:
-      - 80:80
-    depends_on:
-      - ctfd
+  # nginx:
+  #   image: nginx:stable
+  #   restart: always
+  #   volumes:
+  #     - ./conf/nginx/http.conf:/etc/nginx/nginx.conf
+  #   ports:
+  #     - 80:80
+  #   depends_on:
+  #     - ctfd
 
   db:
     image: mariadb:10.11
@@ -82,3 +83,5 @@ networks:
   default:
   internal:
     internal: true
+  gateway-nginx:
+    external: true
